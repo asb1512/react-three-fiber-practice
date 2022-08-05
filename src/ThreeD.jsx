@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Canvas } from '@react-three/fiber';
 import { useSpring } from '@react-spring/core';
 import { a } from '@react-spring/three';
 import './App.css';
 
-export default function ThreeD() {
-  const [active, setActive] = useState(0);
-
+export default function ThreeD({ active, setActive }) {
   const { spring } = useSpring({
     spring: active,
     config: {
@@ -25,7 +24,6 @@ export default function ThreeD() {
     <div id="canvas-container">
       <Canvas
         shadows
-        colorManagement
         camera={{ position: [-10, 10, 10], fov: 35 }}
       >
         <ambientLight />
@@ -49,3 +47,8 @@ export default function ThreeD() {
     </div>
   );
 }
+
+ThreeD.propTypes = {
+  active: PropTypes.number.isRequired,
+  setActive: PropTypes.func.isRequired,
+};
